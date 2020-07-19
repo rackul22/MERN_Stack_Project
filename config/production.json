@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://rachana123:rachana123@devconnector.frimo.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "jwtToken": "mysecrettoken"
+}
