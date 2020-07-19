@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://rachana123:rachana123@devconnector.frimo.mongodb.net/<dbname>?retryWrites=true&w=majority",
-  "jwtToken": "mysecrettoken"
+  "jwtToken": "mysecrettoken",
+  "githubClientID": "b532f7e29e521f4040be",
+  "githubSecret": "245993e8412dcd9efcf9028ac50a5b6dc1126111"
 }
