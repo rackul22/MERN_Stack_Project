@@ -1,23 +1,28 @@
 import React, { Fragment, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
+import { getProfileById } from '../../action/profile';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
 import ProfileGithub from './ProfileGithub';
-import { getProfileById } from '../../actions/profile';
 
-const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
+const Profile = ({
+  getProfileById,
+  profile: { profile, loading },
+  auth,
+  match,
+}) => {
   useEffect(() => {
     getProfileById(match.params.id);
   }, [getProfileById, match.params.id]);
 
   return (
     <Fragment>
-      {profile === null ? (
+      {profile === null || loading ? (
         <Spinner />
       ) : (
         <Fragment>
@@ -32,8 +37,8 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
               </Link>
             )}
           <div className='profile-grid my-1'>
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
+            <ProfileTop profile={profile}></ProfileTop>
+            <ProfileAbout profile={profile}></ProfileAbout>
             <div className='profile-exp bg-white p-2'>
               <h2 className='text-primary'>Experience</h2>
               {profile.experience.length > 0 ? (
@@ -46,7 +51,7 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
                   ))}
                 </Fragment>
               ) : (
-                <h4>No experience credentials</h4>
+                <h4>No Experience credentials</h4>
               )}
             </div>
 
@@ -62,12 +67,11 @@ const Profile = ({ getProfileById, profile: { profile }, auth, match }) => {
                   ))}
                 </Fragment>
               ) : (
-                <h4>No education credentials</h4>
+                <h4>No Education credentials</h4>
               )}
             </div>
-
             {profile.githubusername && (
-              <ProfileGithub username={profile.githubusername} />
+              <ProfileGithub username={profile.githubusername}></ProfileGithub>
             )}
           </div>
         </Fragment>
